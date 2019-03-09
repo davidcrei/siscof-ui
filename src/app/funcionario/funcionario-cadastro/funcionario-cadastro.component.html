@@ -1,0 +1,38 @@
+<div class="container">
+  <form> 
+  <div class="ui-g">
+   
+  <div class="ui-g-12">
+      <h1>Cadastro de Funcionários</h1>
+  </div>
+  
+  <div class="ui-g-12 ui-fluid">
+      <label>Nome</label>
+      <input pInputText  type="text">
+  </div> 
+  
+   <div class="ui-g-12 ui-fluid">
+      <label>CPF</label>
+      <input pInputText type="text">
+    </div>
+    
+    <div class="ui-g-12 ui-fluid">
+      <label>Obra</label>
+      <p-dropdown [options]="obras"></p-dropdown>
+    </div>
+
+    <div class="ui-g-6 ui-md-3 ui-fluid">
+      <label>Data Inicio</label>
+      <p-calendar dateFormat="dd/mm/yy"
+        [inline]="false" [readonlyInput]="false"
+        [showIcon]="false"></p-calendar>
+    </div>
+
+  <div class="ui-g-12">
+    <button pButton type="submit" label="Salvar"></button>
+    <a href="javascript:;">Voltar para a pesquisa</a>
+</div>
+</div>
+</form>
+</div>
+ 
