@@ -1,47 +1,52 @@
 <div class="container">
-    
+
   <div class="ui-g">
-    <form autocomplete="off" (ngSubmit)="pesquisar()"> 
+    <form autocomplete="off" (ngSubmit)="pesquisar()">
     <div class="ui-g-12">
         <h1>Funcionários</h1>
     </div>
-    
+
     <div class="ui-g-12 ui-fluid">
         <label>Nome</label>
-        <input pInputText type="text" name="nome" [(ngModel)]="nome">
-    </div> 
-    
+        <input pInputText type="text" name="nome" [(ngModel)]="filtro.nome">
+    </div>
+
     <div class="ui-g-12 ui-fluid">
         <label>CPF</label>
-        <input pInputText type="text">
+        <input pInputText type="text" name="cpf" [(ngModel)] = "filtro.cpf">
       </div>
-    
+
     <div class="ui-g-12">
         <button pButton type="submit"  label="Pesquisar"></button>
     </div>
 </form>
 
     <div class="ui-g">
-     
+
         <div class="ui-g">
           <div class="ui-g-12">
-            <p-dataTable [value]="funcionarios" [paginator]="true" [rows]="3" 
+            <p-dataTable [value]="funcionarios" [paginator]="true" [rows]="3"
                 [responsive]="true" #tabela>
               <p-column field="nome" header="Nome"></p-column>
               <p-column field="cpf" header="CPF" styleClass="col-cpf"></p-column>
               <p-column field="obra.nome" header="Obra"></p-column>
-              <p-column field="dataInicio" header="Data Início" styleClass="col-data"></p-column>
-             
+
+              <p-column field="dataInicio" header="Data Início" styleClass="col-data">
+                <ng-template let-lanc="rowData" pTemplate="body">
+                                  <span>{{ lanc.dataInicio | date:'dd/MM/yyyy' }}</span>
+                </ng-template>
+              </p-column>
+
               <p-column styleClass="col-acoes">
                   <ng-template let-lanc="rowData" pTemplate="body">
-                    <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top"></a>
-                    <button pButton icon="fa-trash"  pTooltip="Excluir" tooltipPosition="top" (click)="excluir(lanc)"></button>
+                    <a pButton icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top"></a>
+                    <button pButton icon="fa fa-trash"  pTooltip="Excluir" tooltipPosition="top" (click)="excluir(lanc)"></button>
                   </ng-template>
               </p-column>
             </p-dataTable>
-      
+
           </div>
-      
+
           <div class="ui-g-12">
             <a pButton label="Novo Funcionário"></a>
       </div>
@@ -49,7 +54,7 @@
 
 
       </div>
-  
+
     </div>
   </div>
   </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FuncionarioService } from './../funcionario.service';
+import { FuncionarioService, FuncionarioFiltro } from './../funcionario.service';
 import { ToastyService } from 'ng2-toasty';
 
 @Component({
@@ -8,24 +8,23 @@ import { ToastyService } from 'ng2-toasty';
   styleUrls: ['./funcionario-consulta.component.css']
 })
 export class FuncionarioConsultaComponent implements OnInit {
-   
-  nome: string;
+  filtro = new FuncionarioFiltro();
   funcionarios = [];
   @ViewChild('tabela') grid;
-  
+
   constructor(
     private funcionarioService: FuncionarioService,
-    private toasty:ToastyService
+    private toasty: ToastyService
   ) {}
 
   ngOnInit() {
     this.pesquisar();
   }
   pesquisar() {
-    this.funcionarioService.pesquisar({nome:this.nome})
+    this.funcionarioService.pesquisar(this.filtro)
       .then(funcionarios => this.funcionarios = funcionarios);
 }
-  
+
 excluir(funcionario: any) {
   this.funcionarioService.excluir(funcionario.id)
     .then(() => {

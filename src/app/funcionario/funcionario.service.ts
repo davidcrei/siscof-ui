@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
 
-export interface FuncionarioFiltro {
+export class FuncionarioFiltro {
   nome: string;
-}
+  cpf: string;
+  }
 
 @Injectable()
 export class FuncionarioService {
@@ -23,11 +24,15 @@ export class FuncionarioService {
       params.set('nome', filtro.nome);
       }
 
+      if (filtro.cpf) {
+      params.set('cpf', filtro.cpf);
+      }
+
     return this.http.get(`${this.funcionariosUrl}?resumo`,
-    {headers,search:params})
+    {headers, search: params})
       .toPromise()
-      .then(response =>response.json());
-      
+      .then(response => response.json());
+
 }
 
 excluir(codigo: number): Promise<void> {
