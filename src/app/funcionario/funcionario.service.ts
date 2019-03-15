@@ -2,10 +2,19 @@ import { Http, Headers, URLSearchParams  } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
+import * as moment from 'moment';
 
 export class FuncionarioFiltro {
   nome: string;
   cpf: string;
+}
+export class Funcionario {
+  id: number;
+  cpf: string;
+  nome: string;
+  dataInicio: Date;
+  documentoDigitalizadoId: number;
+  obraId: number;
   }
 
 @Injectable()
@@ -33,7 +42,7 @@ export class FuncionarioService {
       .toPromise()
       .then(response => response.json());
 
-}
+  }
 
 excluir(codigo: number): Promise<void> {
   const headers = new Headers();
@@ -43,4 +52,25 @@ excluir(codigo: number): Promise<void> {
     .toPromise()
     .then(() => null);
 }
+
+pesquisarPorId(codigo: number): Promise<Funcionario> {
+    const headers = new Headers();
+    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    return this.http.get(`${this.funcionariosUrl}/${codigo}`, {headers })
+      .toPromise()
+      .then(response => {
+       const funcionario = response.json() as Funcionario;
+       this.converterStringsParaDatas([funcionario]);
+       return funcionario;
+    });
+
+  }
+
+  private converterStringsParaDatas(funcionarios: Funcionario[]) {
+    for (const funcionario of funcionarios) {
+      funcionario.dataInicio = moment(funcionario.dataInicio).toDate();
+      funcionario.dataInicio = moment(funcionario.dataInicio, 'YYYY-MM-DD').toDate();
+     }
+  }
 }

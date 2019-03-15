@@ -1,21 +1,22 @@
 <div class="container">
-  <form> 
+  {{f.valid}}
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
   <div class="ui-g">
-   
+
   <div class="ui-g-12">
       <h1>Cadastro de Funcionários</h1>
   </div>
-  
+
   <div class="ui-g-12 ui-fluid">
-      <label>Nome</label>
-      <input pInputText  type="text">
-  </div> 
-  
+      <label class="form-control-label">Nome</label>
+       <input pInputText type="text" name="nome" [(ngModel)]="funcionario.nome" required>
+  </div>
+
    <div class="ui-g-12 ui-fluid">
       <label>CPF</label>
-      <input pInputText type="text">
+      <input pInputText type="text" name="cpf" [(ngModel)]="funcionario.cpf" required >
     </div>
-    
+
     <div class="ui-g-12 ui-fluid">
       <label>Obra</label>
       <p-dropdown [options]="obras"></p-dropdown>
@@ -25,14 +26,13 @@
       <label>Data Inicio</label>
       <p-calendar dateFormat="dd/mm/yy"
         [inline]="false" [readonlyInput]="false"
-        [showIcon]="false"></p-calendar>
+        [showIcon]="false" name="dataInicio" [(ngModel)]="funcionario.dataInicio" required></p-calendar>
     </div>
 
   <div class="ui-g-12">
     <button pButton type="submit" label="Salvar"></button>
-    <a href="javascript:;">Voltar para a pesquisa</a>
+    <a href="javascript:;" routerLink="/funcionarios">Voltar para a pesquisa</a>
 </div>
 </div>
 </form>
 </div>
- 

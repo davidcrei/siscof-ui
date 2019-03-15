@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -24,8 +25,9 @@ import { FuncionarioService } from '../funcionario/funcionario.service';
     FormsModule,
     TabViewModule,
     ButtonModule,
-    TooltipModule
-  ],
+    TooltipModule,
+    RouterModule
+    ],
   declarations: [
     FuncionarioCadastroComponent,
     FuncionarioConsultaComponent

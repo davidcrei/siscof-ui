@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FuncionarioService, FuncionarioFiltro } from './../funcionario.service';
 import { ToastyService } from 'ng2-toasty';
 
+
 @Component({
   selector: 'app-funcionario-consulta',
   templateUrl: './funcionario-consulta.component.html',
