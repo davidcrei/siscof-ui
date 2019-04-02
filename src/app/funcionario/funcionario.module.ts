@@ -14,6 +14,7 @@ import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 import { FuncionarioConsultaComponent } from './funcionario-consulta/funcionario-consulta.component';
 import { FuncionarioCadastroComponent } from './funcionario-cadastro/funcionario-cadastro.component';
 import { FuncionarioService } from '../funcionario/funcionario.service';
+import { MessageComponent } from './../message/message.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { FuncionarioService } from '../funcionario/funcionario.service';
     ],
   declarations: [
     FuncionarioCadastroComponent,
-    FuncionarioConsultaComponent
+    FuncionarioConsultaComponent,
+    MessageComponent
   ],
   providers: [FuncionarioService],
   exports: [

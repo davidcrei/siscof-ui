@@ -16,7 +16,7 @@ import { FuncionarioModule } from './funcionario/funcionario.module';
   declarations: [
     AppComponent,
     NavbarComponent
-  ],
+ ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

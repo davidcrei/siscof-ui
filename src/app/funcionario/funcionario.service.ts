@@ -73,4 +73,15 @@ pesquisarPorId(codigo: number): Promise<Funcionario> {
       funcionario.dataInicio = moment(funcionario.dataInicio, 'YYYY-MM-DD').toDate();
      }
   }
+
+  adicionar(funcionario: Funcionario): Promise<Funcionario> {
+    const headers = new Headers();
+    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post(this.funcionariosUrl,
+        JSON.stringify(funcionario), { headers })
+      .toPromise()
+      .then(response => response.json());
+  }
 }

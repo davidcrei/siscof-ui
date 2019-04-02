@@ -1,38 +1,50 @@
 <div class="container">
   {{f.valid}}
   <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
-  <div class="ui-g">
 
-  <div class="ui-g-12">
-      <h1>Cadastro de Funcionários</h1>
-  </div>
+   <div class="ui-g">
+      <div class="ui-g-12">
+          <h1>Cadastro de Funcionários</h1>
+      </div>
 
-  <div class="ui-g-12 ui-fluid">
-      <label class="form-control-label">Nome</label>
-       <input pInputText type="text" name="nome" [(ngModel)]="funcionario.nome" required>
-  </div>
+      <div class="ui-g-12 ui-fluid">
+          <label class="form-control-label">Nome</label>
+          <input pInputText type="text" name="nome" [(ngModel)]="funcionario.nome" required minlength="5" #nome="ngModel">
 
-   <div class="ui-g-12 ui-fluid">
-      <label>CPF</label>
-      <input pInputText type="text" name="cpf" [(ngModel)]="funcionario.cpf" required >
-    </div>
+          <app-message [control]="nome" error="required"
+            text="Informe um Nome Válido">
+          </app-message>
 
-    <div class="ui-g-12 ui-fluid">
-      <label>Obra</label>
-      <p-dropdown [options]="obras"></p-dropdown>
-    </div>
+           <app-message [control]="nome" error="minlength"
+            text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracter">
+          </app-message>
 
-    <div class="ui-g-6 ui-md-3 ui-fluid">
-      <label>Data Inicio</label>
-      <p-calendar dateFormat="dd/mm/yy"
-        [inline]="false" [readonlyInput]="false"
-        [showIcon]="false" name="dataInicio" [(ngModel)]="funcionario.dataInicio" required></p-calendar>
-    </div>
+      </div>
 
-  <div class="ui-g-12">
-    <button pButton type="submit" label="Salvar"></button>
-    <a href="javascript:;" routerLink="/funcionarios">Voltar para a pesquisa</a>
-</div>
-</div>
+      <div class="ui-g-12 ui-fluid">
+          <label>CPF</label>
+          <input pInputText type="text" name="cpf" [(ngModel)]="funcionario.cpf" required  #cpf ="ngModel">
+          <div *ngIf="cpf.hasError('required')  && cpf.touched">Informe o CPF</div>
+
+       </div>
+
+        <div class="ui-g-12 ui-fluid">
+          <label>Obra</label>
+          <p-dropdown [options]="obras"></p-dropdown>
+        </div>
+
+        <div class="ui-g-6 ui-md-3 ui-fluid">
+          <label>Data Inicio</label>
+          <p-calendar dateFormat="dd/mm/yy"
+            [inline]="false" [readonlyInput]="false"
+            [showIcon]="false" name="dataInicio" [(ngModel)]="funcionario.dataInicio" required></p-calendar>
+        </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Salvar"  [disabled]="f.invalid"></button>
+        <a href="javascript:;" routerLink="/funcionarios">Voltar para a pesquisa</a>
+
+      </div>
+   </div>
 </form>
 </div>
